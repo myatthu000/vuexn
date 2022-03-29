@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        .loadingpage{
+            display:none;
+        }
+        .donepage{
+            display:none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button onclick="startFetch()" >Click</button>
+    <div class="loadingpage">Loading ...</div>
+    <div class="donepage">Data fetching Done</div>
+
+    <script>
+        function loadingpage(x){
+            let d = document.querySelector(".loadingpage").style.display=[`${x}`]
+            return d
+        }
+        function donepage(y){
+            return [document.querySelector(".donepage").style.display=[`${y}`],alert("Data fetch is done")]
+            //return document.querySelector(".donepage").style.display=[`${y}`]
+        }
+        const startFetch = ()=>{
+            loadingpage("block");
+
+            let url = 'https://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=a6b71b088df567ec88d2514bc9c4e563';
+
+            fetch(url)
+            .then(response=>response.json())
+            .then(data => {
+                loadingpage("none");
+                
+                console.log(data)
+                donepage("block");
+            })
+        }
+    </script>
+
+   
+</body>
+
+</html>
